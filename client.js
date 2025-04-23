@@ -87,14 +87,6 @@ client.on('ready', () => {
     console.log('WhatsApp client is ready!');
     setupCronJobs();
 });
-// Add an event listener for messages
-client.on('message', async (message) => {
-        // Custom reply explaining the bot's purpose
-        const reply = "Hello! I'm not a conversational AI - I'm just a notification bot that delivers your scheduled daily and weekly insights. I don't have chat capabilities, but I'll continue delivering your scheduled updates as planned. If you need assistance, please contact the system administrator.";
-        await message.reply(reply);
-
-});
-
 // Function to fetch and send insights
 async function fetchAndSendInsight(endpoint, messageType) {
     try {
@@ -120,7 +112,8 @@ async function fetchAndSendInsight(endpoint, messageType) {
 // Set up cron jobs
 function setupCronJobs() {
     // Daily insight Monday to Friday at 8:30 AM
-    cron.schedule('30 8 * * 1-5', async () => {
+    // TODO Revert this back to 8 30 after testing
+    cron.schedule('05 13 * * 1-5', async () => {
         await fetchAndSendInsight('/api/daily-ai/', 'daily');
     }, {
         timezone: TIMEZONE
