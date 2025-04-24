@@ -111,16 +111,15 @@ async function fetchAndSendInsight(endpoint, messageType) {
 
 // Set up cron jobs
 function setupCronJobs() {
-    // Daily insight Monday to Friday at 8:30 AM
-    // TODO Revert this back to 8 30 after testing
-    cron.schedule('05 13 * * 1-5', async () => {
+    // Daily insight Monday to Friday at 8:15 AM
+    cron.schedule('15 8 * * 1-5', async () => {
         await fetchAndSendInsight('/api/daily-ai/', 'daily');
     }, {
         timezone: TIMEZONE
     });
 
-    // Weekly insight on Saturday at 8:30 AM
-    cron.schedule('30 8 * * 6', async () => {
+    // Weekly insight on Saturday at 8:15 AM
+    cron.schedule('15 8 * * 6', async () => {
         await fetchAndSendInsight('/api/weekly-ai/', 'weekly');
     }, {
         timezone: TIMEZONE
